@@ -8,7 +8,7 @@
 [ext_resource path="res://Player.gd" type="Script" id=7]
 [ext_resource path="res://phone/PhoneScreen.tscn" type="PackedScene" id=8]
 [ext_resource path="res://phone/ChoiceArea.gd" type="Script" id=9]
-[ext_resource path="res://sound_effects/save_and_load/Save.tscn" type="PackedScene" id=11]
+[ext_resource path="res://save_and_load/Save.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -234,4 +234,5 @@ margin_right = 984.0
 margin_bottom = 560.0
 rect_min_size = Vector2( 50, 0 )
 custom_styles/panel = SubResource( 7 )
+
 [connection signal="animation_finished" from="TransitionManager/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
