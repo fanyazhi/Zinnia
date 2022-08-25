@@ -1,0 +1,239 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://player_room/PlayerRoom.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts/plex_mono_16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Game.gd" type="Script" id=3]
+[ext_resource path="res://TransitionManager.gd" type="Script" id=4]
+[ext_resource path="res://sound_effects/Door-Bell-Ding-A1-www.fesliyanstudios.com.mp3" type="AudioStream" id=5]
+[ext_resource path="res://CommandProcessor.gd" type="Script" id=6]
+[ext_resource path="res://Player.gd" type="Script" id=7]
+[ext_resource path="res://phone/PhoneScreen.tscn" type="PackedScene" id=8]
+[ext_resource path="res://phone/ChoiceArea.gd" type="Script" id=9]
+[ext_resource path="res://sound_effects/Video-Game-Secret-Sound-A3-Slowest-www.fesliyanstudios.com.mp3" type="AudioStream" id=10]
+[ext_resource path="res://save_and_load/Save.tscn" type="PackedScene" id=11]
+
+[sub_resource type="Animation" id=7]
+resource_name = "fade_in"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionManager/CanvasLayer/Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "fade_out"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("TransitionManager/CanvasLayer/Overlay:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.921569, 0.909804, 0.737255, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.0431373, 0.266667, 0.411765, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.529412, 0.788235, 0.952941, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[node name="Game" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="SaveMenu" parent="." instance=ExtResource( 11 )]
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="CommandProcessor" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="TransitionManager" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="FadeInSound" type="AudioStreamPlayer" parent="TransitionManager"]
+stream = ExtResource( 10 )
+
+[node name="FadeOutSound" type="AudioStreamPlayer" parent="TransitionManager"]
+stream = ExtResource( 5 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TransitionManager"]
+root_node = NodePath("../..")
+anims/fade_in = SubResource( 7 )
+anims/fade_out = SubResource( 8 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="TransitionManager"]
+layer = 10
+
+[node name="Overlay" type="ColorRect" parent="TransitionManager/CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0 )
+
+[node name="InteractiveObjects" type="PanelContainer" parent="."]
+
+[node name="InteractiveObjectDescription" type="PanelContainer" parent="InteractiveObjects"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 175.0
+margin_bottom = 35.0
+
+[node name="Label" type="Label" parent="InteractiveObjects/InteractiveObjectDescription"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 161.0
+margin_bottom = 21.0
+text = "description of the photo"
+
+[node name="InteractiveObject" type="PanelContainer" parent="InteractiveObjects"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 175.0
+margin_bottom = 35.0
+
+[node name="Label" type="Label" parent="InteractiveObjects/InteractiveObject"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 161.0
+margin_bottom = 21.0
+text = "photo"
+
+[node name="BackGround" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="BackGround"]
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackGround/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 580.0
+custom_constants/separation = 20
+
+[node name="PlayerRoom" parent="BackGround/MarginContainer/HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 0.0
+margin_right = 570.0
+rect_min_size = Vector2( 0, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackGround/MarginContainer/HBoxContainer"]
+margin_left = 590.0
+margin_right = 914.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 324, 0 )
+custom_constants/separation = 0
+
+[node name="PhoneHeader" type="PanelContainer" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 324.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 0, 35 )
+custom_styles/panel = SubResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer/PhoneHeader"]
+margin_right = 324.0
+margin_bottom = 35.0
+
+[node name="back" type="Label" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer/PhoneHeader/HBoxContainer"]
+margin_top = 10.0
+margin_right = 28.0
+margin_bottom = 24.0
+text = "     <"
+
+[node name="Irina" type="Label" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer/PhoneHeader/HBoxContainer"]
+margin_left = 128.0
+margin_top = 6.0
+margin_right = 228.0
+margin_bottom = 28.0
+size_flags_horizontal = 6
+custom_fonts/font = ExtResource( 2 )
+text = "Irina     "
+
+[node name="PhoneScreen" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 8 )]
+margin_top = 35.0
+margin_right = 324.0
+margin_bottom = 435.0
+
+[node name="IsTypingPrompt" type="PanelContainer" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 435.0
+margin_right = 324.0
+margin_bottom = 470.0
+rect_min_size = Vector2( 0, 35 )
+custom_styles/panel = SubResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer/IsTypingPrompt"]
+margin_right = 324.0
+margin_bottom = 35.0
+size_flags_vertical = 3
+
+[node name="IrinaIsTyping" type="Label" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer/IsTypingPrompt/HBoxContainer"]
+margin_top = 10.0
+margin_right = 111.0
+margin_bottom = 24.0
+text = "   Irina is typing..."
+
+[node name="ChoiceArea" type="PanelContainer" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 470.0
+margin_right = 324.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 0, 90 )
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 9 )
+
+[node name="MarginContainer" type="MarginContainer" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer/ChoiceArea"]
+margin_right = 324.0
+margin_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="VBoxContainer" parent="BackGround/MarginContainer/HBoxContainer/VBoxContainer/ChoiceArea/MarginContainer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 314.0
+margin_bottom = 80.0
+custom_constants/separation = 0
+
+[node name="RightSideBuffer" type="PanelContainer" parent="BackGround/MarginContainer/HBoxContainer"]
+margin_left = 934.0
+margin_right = 984.0
+margin_bottom = 560.0
+rect_min_size = Vector2( 50, 0 )
+custom_styles/panel = SubResource( 6 )
+
+[connection signal="animation_finished" from="TransitionManager/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
