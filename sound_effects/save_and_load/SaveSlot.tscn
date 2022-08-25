@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://save_and_load/SaveSlot.gd" type="Script" id=1]
-[ext_resource path="res://fonts/open_sans_14.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/open_sans_14.tres" type="DynamicFont" id=1]
+[ext_resource path="res://sound_effects/save_and_load/SaveSlot.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="SaveSlot" type="PanelContainer"]
 margin_right = 488.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
-custom_styles/panel = SubResource( 4 )
-script = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 2 )
 
 [node name="Button" type="Button" parent="."]
 margin_right = 488.0
 margin_bottom = 26.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 toggle_mode = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Button"]
@@ -36,7 +36,7 @@ margin_top = 3.0
 margin_right = 371.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "day 1"
 
 [node name="SystemTime" type="Label" parent="Button/HBoxContainer"]
@@ -44,7 +44,7 @@ margin_left = 375.0
 margin_top = 3.0
 margin_right = 408.0
 margin_bottom = 23.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "Time"
 
 [node name="spacer2" type="Label" parent="Button/HBoxContainer"]
@@ -53,5 +53,4 @@ margin_top = 6.0
 margin_right = 488.0
 margin_bottom = 20.0
 text = "                   "
-
 [connection signal="toggled" from="Button" to="." method="_on_Button_toggled"]
