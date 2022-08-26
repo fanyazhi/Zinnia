@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/plex_mono_16.tres" type="DynamicFont" id=1]
-[ext_resource path="res://main_panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/main_panel.tres" type="StyleBox" id=2]
 [ext_resource path="res://player_room/PlayerRoom.gd" type="Script" id=3]
+
 
 [node name="PlayerRoom" type="PanelContainer"]
 margin_left = 728.0

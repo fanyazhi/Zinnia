@@ -1,7 +1,6 @@
 extends Control
 
 
-onready var command_processor = $CommandProcessor
 onready var player = $Player
 onready var phone_screen = $BackGround/MarginContainer/HBoxContainer/VBoxContainer/PhoneScreen
 onready var choice_area = $BackGround/MarginContainer/HBoxContainer/VBoxContainer/ChoiceArea
@@ -34,6 +33,8 @@ func _ready() -> void:
 		exec_day_2()
 	elif GameData.current_day == 3:
 		exec_day_3()
+	elif GameData.current_day == 4:
+		exec_day_4()
 	
 	
 	
@@ -967,18 +968,426 @@ func exec_day_3():
 #                                #
 ##################################
 func exec_day_4():
-	# TRANSITION - day start
+	
+	# TRANSITION - day start - without fade out
 	GameData.current_day = 4
 	phone_screen.clear_phone_screen()
+	
+	
+	# Add Aliyah's confession before day start transition
+	add_my_text_entry("Irina")
+	phone_screen.create_time_stamp("Sun. 1:39am")
+	add_my_text_entry("Irina")
+	phone_screen.create_time_stamp("Sun. 2:01am")
+	add_my_text_entry("Irina")
+	phone_screen.create_time_stamp("Sun. 2:17am")
+	add_my_text_entry("Are you still there?")
+	add_my_text_entry("It's okay if you aren't.")
+	add_my_text_entry("I'm just glad you are still here.")
+	phone_screen.create_time_stamp("Sun. 2:34am")
+	add_my_text_entry("I just want to confess.")
+	add_my_text_entry(PoolStringArray(["Back in high school, when we first met… i actually didn’t like you very much.",
+						"You were the embodiment of freedom."
+						]).join("\n"))
+	add_my_text_entry("And I hated that.")
+	add_my_text_entry(PoolStringArray(["But your singing were so… soul touching.",
+						"I think i was moved when i first saw you performing in school.",
+						"You know, back then, I didn't care about most people in school.",
+						"All i care about were the elites, the academically adept and the rich kids...",
+						"And when i changed my mind, it’s already too late.",
+						"It was aready the second half of the senior year.",
+						]).join("\n"))
+	add_my_text_entry(PoolStringArray(["As time gone by, more and more of my attention were drawn on you.",
+						"But i didn’t know what to do with my feelings.",
+						"I regrets it so much now.",
+						]).join("\n"))
+	add_my_text_entry(PoolStringArray(["If only i had come out and said something, maybe we could’ve hang out...",
+						"And not end like this..."
+						]).join("\n"))
+
+	# TRANSITION - day start - continue
 	transition_manager.fade_out_silent()
 	yield(animation_player, "animation_finished")
 	
+	
 	# Add a player choice
-	add_single_choice_entry("It ain't much, but it's all i've got. \n" + "*tip hat cat*\n" + "Get prepared!",
-							"It ain't much, but it's all i've got")
+	add_single_choice_entry(PoolStringArray(["Sorry, just ignore those messages",
+						"I just looked through the messages I sent, they are so embarrassing...",
+						"I must have been drunk or something, sorry to bother you.",
+						"Really sorry..."
+						]).join("\n"),
+						"Sorry, just ignore those messages")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	phone_screen.create_time_stamp("Sun. 4:56am")
+	choice_area.clear_all()
+	
+
+	
+	# TODO: add a in day transition 
+	
+	# Add her entry	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("*sigh cat*\n" + "You know, after reading that, i have to tell you my story too.\n" + "Or else you will seem like a creep.\n" + "And if i brush it off, you'll just think i betrayed you.")
+	phone_screen.create_time_stamp("Sun. 10:12am")
+	yield(get_tree().create_timer(3), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("Aliyah is so sneaky.")
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Aliyah bad bad.")
+	
+	# Add a player choice
+	add_single_choice_entry("I’m not...that’s not what i meant!")
+	add_single_choice_entry("I just wanted to be truthful.")
 	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
 	choice_area.clear_all()
-	pass
+	
+	# Add a player choice
+	add_single_choice_entry("Sorry")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# Add her entry	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Stop apologizing!\n" + "Ok. i'll confess my story too.")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("You mentioned you were moved by my singing voice.\n" + "And i am not doing it anymore.")
+
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("Have you ever wondered why?")
+
+	# Add a player choice
+	add_single_choice_entry("i thought you wouldn’t tell me")
+	add_single_choice_entry("i didn't want to bring up bad memories")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("So you did think about it.\n" + "Don't misinterpret me.\n" + "I'm not blaming you.")
+
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("...truth be told, i was traumatized by a stage show.")
+
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("You know, i’ve always wanted to compose music and sing.\n" + "so i was really looking forward to attending the musical school.\n" + "Wanted to meet new musician friends and stuff.\n" + "But now... whenever i tried to sing, or write something...")
+
+	yield(get_tree().create_timer(3), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("that thing* just keeps lingering in my mind.")
+
+	# Add a player choice
+	add_single_choice_entry("I’m so sorry to hear that...")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("STOP IT!")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Just hear me out, okay?\n" + "I’m fine now.\n" + "Everything is past tense.\n" + "I’m just telling you this, so i can feel better.")
+	
+	# Add a player choice
+	add_single_choice_entry("*patient cat*")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+	
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("*cat smile*")
+
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("I was really bold back in my teenage days.\n" + "I must have thought i was the main character or something.\n" + "I was rebellious, i didn’t believe a single word from the authorities.")
+
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("So i wanted to be a musician...when my family told me not to.\n" + "Yes, it was my parents.\n" + "They were surgeons back in their home country. \n" + "But after moving here, they can’t continue being surgeons.")
+	
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("Well...\n" + "I am their only child, so i had to become a doctor too.\n" + "It’s some generic pitiful stuff, I know.\n" + "but that’s just my life.")
+	
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("i’m not blaming my failure on them.\n" + "They aren't violent or anything.\n" + "If they wanted me to do something, they just stay stone-cold until i change my mind.")
+	
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("It worked.\n" + "so they thought it would work for my life goals too.\n" + "But I had my limits, you know.")
+	
+	# Add a player choice
+	add_single_choice_entry("You are so brave, shining like the polar star.",
+							"You are so brave")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(0.5), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("I’m being serious rn.")
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Dead serious.")
+
+	# Add a player choice
+	add_single_choice_entry("I know.")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(0.5), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Thank you.")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("It was my real stage show.\n" + "Like, out of school, the real deal.\n" + "Someone was taking a video of me.\n")
+
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("I thought it’s just some excited audience, it even made me a bit happier seeing them want to record the moment.\n" + "So i didn’t pay much attention.")
+
+	# Add a player choice
+	add_single_choice_entry("So it was a good thing?")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+	
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("Actually, no.\n" + "For some reason, i was harassed and doxed by some insane idol fangirls the next week.\n" + "Like received dead frogs in my mail box and stuff. It was wild. They must’ve been thirteen or something.")
+
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("Apparently i pissed off a famous idol somehow.\n" + "Ofc i laughed it off.\n")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("But in the next stage show, someone threw a water bottle towards the stage light.\n" + "It dropped right on my head.\n" + "I passed out, stayed in a hospital for half a year.")
+
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("My musical school thing is in shambles, and rehabilitation took a year.\n" + "After so much time, I recovered with no issue.\n" + "But my head literally gets dizzy when i get on stage.\n")
+
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("So I’ve accepted my fate, and moved on to a different form of art.")
+
+
+	# Add a player choice
+	add_single_choice_entry("I'll always be here when you need me")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("i know you will")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("but don’t say it like that, promises like these won’t change anything.\n\n" + "Just be here when i tell you to.")
+
+	# Add a player choice
+	add_single_choice_entry("*cats shining eyes*\n" + "Girl boss...",
+							"*cats shining eyes*")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("*smirk cat*")
+
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("My parents kept saying that’s what i get when i go against their sayings.\n" + "They kept saying that, when i was in the hospital.\n" + "I hated that. But i had to rely on them to take care of me.\n" + "Since I didn’t have many friends.")
+	
+	yield(get_tree().create_timer(3), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(3), "timeout")
+	hide_typing()
+	add_her_text_entry("The friends i had didn’t show up or did anything.\n" + "They probably believed whatever was posted online, by those crazy internet mobs, and distanced themselves from me.\n" + "So i said hell no.\n" + "didn’t want them to be my friends anyways.")
+
+	# Add a player choice
+	add_single_choice_entry("i won’t go")
+	add_single_choice_entry("i'm not like them")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Just be here when i need you.")
+	
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Dont say those empty words, Aliyah.")
+
+	yield(get_tree().create_timer(2), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(2), "timeout")
+	hide_typing()
+	add_her_text_entry("I trust you.")
+
+	# Add a player choice
+	add_single_choice_entry("*crying cat*")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+	
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("*hugging cats*")
+	
+	# Add a player choice
+	add_single_choice_entry("Maybe it’s weird, but i feel better now.")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("That’s exactly what i wanted.")
+
+	# Add a player choice
+	var choice_cool = "you are alway so awesome, even after such things happened to you"
+	var choice_cool_short = "you are alway so awesome"
+	var choice_love = "I think i’m loving you more and more, Irina"
+	add_single_choice_entry(choice_cool, choice_cool_short)
+	add_single_choice_entry(choice_love)
+	var response = yield(choice_area, "game_on_choice_selected")
+	add_my_text_entry(response)
+	choice_area.clear_all()
+	
+	if response == choice_love:
+		yield(get_tree().create_timer(2), "timeout")
+		show_typing()
+		yield(get_tree().create_timer(2), "timeout")
+		hide_typing()
+		add_her_text_entry("Love you too")
+	
+	# add her entry
+	yield(get_tree().create_timer(1), "timeout")
+	show_typing()
+	yield(get_tree().create_timer(1), "timeout")
+	hide_typing()
+	add_her_text_entry("Oh! I have assignments due tonight, bye for now.")
+
+	# Add a player choice
+	add_single_choice_entry("Bye!")
+	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
+	choice_area.clear_all()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 ##### Helpers #####
