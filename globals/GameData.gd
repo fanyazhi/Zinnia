@@ -1,4 +1,4 @@
 extends Node
 
 
-var current_day = 4
+var current_day = 1
