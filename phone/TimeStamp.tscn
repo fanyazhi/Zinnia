@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://phone/TimeStamp.gd" type="Script" id=1]
+[ext_resource path="res://fonts/open_sans_14.tres" type="DynamicFont" id=2]
 
 [node name="TimeStamp" type="MarginContainer"]
 margin_left = 1014.0
@@ -16,9 +17,10 @@ script = ExtResource( 1 )
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 11.0
-margin_bottom = 138.0
+margin_bottom = 186.0
 size_flags_horizontal = 7
 size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
 text = "*time*"
 align = 1
 autowrap = true

@@ -1036,6 +1036,7 @@ func exec_day_4():
 	transition_manager.fade_out_silent()
 	yield(animation_player, "animation_finished")
 	
+	yield(get_tree().create_timer(5), "timeout")
 	
 	# Add a player choice
 	add_single_choice_entry(PoolStringArray(["Sorry, just ignore those messages",
@@ -2599,8 +2600,8 @@ func exec_day_12():
 	add_her_text_entry("Now i'm regretting staying up, we won't have enough energy to play for very long")
 
 	# Add a player choice
-	add_single_choice_entry("We should book a hotel for tonight",
-							"Awww, we can come back no matter how late it would be, you know, or even book a hotel?")
+	add_single_choice_entry("Awww, we can come back no matter how late it would be, you know, or even book a hotel?",
+							"We should book a hotel for tonight")
 	add_my_text_entry(yield(choice_area, "game_on_choice_selected"))
 	choice_area.clear_all()
 	
