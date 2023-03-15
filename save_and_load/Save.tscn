@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://save_and_load/Save.gd" type="Script" id=1]
-[ext_resource path="res://fonts/open_sans_14.tres" type="DynamicFont" id=3]
-[ext_resource path="res://fonts/open_sans_16.tres" type="DynamicFont" id=4]
+[ext_resource path="res://ui_themes/MinimalUI/MinimalUI.tres" type="Theme" id=2]
+[ext_resource path="res://fonts/open_sans_32.tres" type="DynamicFont" id=4]
 [ext_resource path="res://FredokaOne-Regular.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://sound_effects/Door-Bell-Ding-A1-www.fesliyanstudios.com.mp3" type="AudioStream" id=6]
+[ext_resource path="res://audio/Door-Bell-Ding-A1-www.fesliyanstudios.com.mp3" type="AudioStream" id=6]
 
 [sub_resource type="DynamicFont" id=1]
 size = 12
@@ -23,7 +23,7 @@ Label/fonts/font = SubResource( 1 )
 Label/styles/normal = null
 
 [sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.768627, 0.945098, 0.980392, 1 )
+bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="Theme" id=5]
 
@@ -41,6 +41,7 @@ layer = 11
 [node name="Control" type="Control" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 2 )
 
 [node name="SaveLoadWindow" type="CenterContainer" parent="CanvasLayer/Control"]
 anchor_right = 1.0
@@ -48,11 +49,11 @@ anchor_bottom = 1.0
 theme = SubResource( 2 )
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Control/SaveLoadWindow"]
-margin_left = 256.0
-margin_top = 172.0
-margin_right = 768.0
-margin_bottom = 428.0
-rect_min_size = Vector2( 512, 256 )
+margin_left = 460.0
+margin_top = 240.0
+margin_right = 1460.0
+margin_bottom = 840.0
+rect_min_size = Vector2( 1000, 600 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 6 )
@@ -60,25 +61,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 4.0
-margin_right = -4.0
-margin_bottom = -4.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
 
-[node name="Console" type="NinePatchRect" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 980.0
+margin_bottom = 580.0
+
+[node name="Console" type="NinePatchRect" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer"]
 self_modulate = Color( 1, 0.501961, 0, 1 )
-margin_right = 504.0
-margin_bottom = 191.0
+margin_right = 960.0
+margin_bottom = 460.0
 size_flags_vertical = 3
 patch_margin_left = 6
 patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/Console"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/Console"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -87,68 +94,68 @@ margin_right = -8.0
 margin_bottom = -8.0
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/Console/ScrollContainer"]
-margin_right = 488.0
-margin_bottom = 175.0
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/Console/ScrollContainer"]
+margin_right = 944.0
+margin_bottom = 444.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ConsoleLabel" type="Label" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer"]
-margin_top = 195.0
-margin_right = 504.0
-margin_bottom = 215.0
+[node name="ConsoleLabel" type="Label" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer"]
+margin_top = 464.0
+margin_right = 960.0
+margin_bottom = 509.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 autowrap = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer"]
-margin_top = 219.0
-margin_right = 504.0
-margin_bottom = 248.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer"]
+margin_top = 513.0
+margin_right = 960.0
+margin_bottom = 560.0
 
-[node name="Control" type="Control" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer"]
-margin_right = 301.0
-margin_bottom = 29.0
+[node name="Control" type="Control" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 600.0
+margin_bottom = 47.0
 size_flags_horizontal = 3
 
-[node name="SaveButton" type="Button" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 305.0
-margin_right = 352.0
-margin_bottom = 29.0
+[node name="SaveButton" type="Button" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 604.0
+margin_right = 692.0
+margin_bottom = 47.0
 theme = SubResource( 5 )
 custom_fonts/font = ExtResource( 4 )
-text = "Save"
+text = " Save "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LoadButton" type="Button" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 356.0
-margin_right = 405.0
-margin_bottom = 29.0
+[node name="LoadButton" type="Button" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 696.0
+margin_right = 788.0
+margin_bottom = 47.0
 custom_fonts/font = ExtResource( 4 )
-text = "Load"
+text = " Load "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Spacer" type="Panel" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 409.0
-margin_right = 419.0
-margin_bottom = 29.0
+[node name="Spacer" type="Panel" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 792.0
+margin_right = 802.0
+margin_bottom = 47.0
 rect_min_size = Vector2( 10, 0 )
 custom_styles/panel = SubResource( 3 )
 
-[node name="ContinueButton" type="Button" parent="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 423.0
-margin_right = 504.0
-margin_bottom = 29.0
+[node name="ContinueButton" type="Button" parent="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 806.0
+margin_right = 960.0
+margin_bottom = 47.0
 custom_fonts/font = ExtResource( 4 )
-text = "Continue"
+text = " Continue "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer/LoadButton" to="." method="_on_LoadButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]

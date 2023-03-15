@@ -3,8 +3,12 @@ extends Node2D
 const SAVE_DIR = "user://saves/"
 const SAVE_SLOT = preload("res://save_and_load/SaveSlot.tscn")
 
-onready var save_slot_rows = $CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/Console/ScrollContainer/VBoxContainer
-onready var console_label = $CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/ConsoleLabel
+onready var save_slot_rows = $CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/Console/ScrollContainer/VBoxContainer
+onready var console_label = $CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/ConsoleLabel
+
+onready var save_button = $CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer/SaveButton
+onready var load_button = $CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer/LoadButton
+onready var continue_button = $CanvasLayer/Control/SaveLoadWindow/Panel/MarginContainer/VBoxContainer/HBoxContainer/ContinueButton
 
 var current_selected_save = ""
 
@@ -112,19 +116,19 @@ func hide_save_menu():
 
 func show_save_menu():
 	$CanvasLayer.visible = true
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/SaveButton.visible = true
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/LoadButton.visible = true
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/ContinueButton.visible = true
+	save_button.visible = true
+	load_button.visible = true
+	continue_button.visible = true
 
 func show_save_menu_load_only():
 	$CanvasLayer.visible = true
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/SaveButton.visible = false
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/LoadButton.visible = true
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/ContinueButton.visible = false
+	save_button.visible = false
+	load_button.visible = true
+	continue_button.visible = false
 	
 func show_save_menu_save_only():
 	$CanvasLayer.visible = true
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/SaveButton.visible = true
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/LoadButton.visible = false
-	$CanvasLayer/Control/SaveLoadWindow/Panel/VBoxContainer/HBoxContainer/ContinueButton.visible = true
+	save_button.visible = true
+	load_button.visible = false
+	continue_button.visible = true
 
